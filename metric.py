@@ -6,17 +6,17 @@ def eval_metric(labels, preds, log_sold_price_groups = [0,50,100, 500, 1000] ):
     metrics = []
     for i in range(len(log_sold_price_groups)):
         try:
-            Filter = (labels >= log_sold_price_groups[i]) & (labels < log_sold_price_groups[i+1])
-            print(Filter)
+            mask_ = (labels >= log_sold_price_groups[i]) & (labels < log_sold_price_groups[i+1])
+            print(mask_)
             try:
-                metrics.append(mean_squared_error(labels[Filter], preds[Filter]))
+                metrics.append(mean_squared_error(labels[mask_], preds[mask_]))
             except:
                 metrics.append(np.nan)
         except:
-            Filter = (labels >= log_sold_price_groups[i])
-            print(Filter)
+            mask_ = (labels >= log_sold_price_groups[i])
+            print(mask_)
             try:
-                metrics.append(mean_squared_error(labels[Filter], preds[Filter]))
+                metrics.append(mean_squared_error(labels[mask_], preds[mask_]))
             except:
                 metrics.append(np.nan)
     
